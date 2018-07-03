@@ -1,0 +1,33 @@
+version: "2"
+
+services:
+  pubsub:
+    container_name: gcp-pubsub-emulator
+    build:
+      context: ./gcp
+      dockerfile: DockerfilePubSub
+    volumes:
+      - ./data/pubsub:/mnt/data/pubsub
+    ports:
+      - "8538:8538"
+    command:
+      /bin/bash -c
+        "gcloud config set project emulator && gcloud beta emulators pubsub start --data-dir /mnt/data/pubsub --host-port 0.0.0.0:8538"
+
+  datastore:
+    container_name: gcp-datastore-emulator
+    build:
+      context: ./gcp
+      dockerfile: DockerfileDataStore
+    volumes:
+      - ./data/datastore:/mnt/data/datastore
+    ports:
+      - "8432:8432"
+    command:
+      /bin/bash -c
+        "gcloud config set project emulator && gcloud beta emulators datastore start --data-dir /mnt/data/datastore --host-port 0.0.0.0:8432"
+
+networks:
+    default:
+        external:
+            name: gcp-network
