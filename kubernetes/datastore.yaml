@@ -1,15 +1,29 @@
-apiVersion: apps/v1beta1
-kind: Deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: datastore-svc
+  labels:
+    app: datastore-svc
+spec:
+  ports:
+  - protocol: TCP
+    name: datastore-svc-port
+    port: 8432
+    targetPort: 8432
+  selector:
+    app: datastore
+
+---
+
+apiVersion: v1
+kind: Pod
 metadata:
   name: datastore
+  namespace: default
+  labels:
+    app: datastore
 spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: datastore
-    spec:
-      containers:
-      - name: datastore
-        image: localhost:5000/datastore
-        imagePullPolicy: IfNotPresent
+  containers:
+  - name: datastore
+    image: localhost:5000/datastore
+    imagePullPolicy: IfNotPresent

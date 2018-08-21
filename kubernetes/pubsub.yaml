@@ -1,15 +1,29 @@
-apiVersion: apps/v1beta1
-kind: Deployment
+apiVersion: v1
+kind: Service
+metadata:
+  name: pubsub-svc
+  labels:
+    app: pubsub-svc
+spec:
+  ports:
+  - protocol: TCP
+    name: pubsub-svc-port
+    port: 8538
+    targetPort: 8538
+  selector:
+    app: pubsub
+
+---
+
+apiVersion: v1
+kind: Pod
 metadata:
   name: pubsub
+  namespace: default
+  labels:
+    app: pubsub
 spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: pubsub
-    spec:
-      containers:
-      - name: pubsub
-        image: localhost:5000/pubsub
-        imagePullPolicy: IfNotPresent
+  containers:
+  - name: pubsub
+    image: localhost:5000/pubsub
+    imagePullPolicy: IfNotPresent
