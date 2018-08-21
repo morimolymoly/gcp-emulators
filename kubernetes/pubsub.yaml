@@ -1,0 +1,15 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: pubsub
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pubsub
+    spec:
+      containers:
+      - name: pubsub
+        image: localhost:5000/pubsub
+        imagePullPolicy: IfNotPresent

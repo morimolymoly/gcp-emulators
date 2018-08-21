@@ -1,0 +1,15 @@
+apiVersion: skaffold/v1alpha2
+kind: Config
+build:
+  artifacts:
+  - imageName: localhost:5000/pubsub
+    docker:
+      dockerfilePath: gcp/DockerfilePubSub
+  - imageName: localhost:5000/datastore
+    docker:
+      dockerfilePath: gcp/DockerfileDataStore
+deploy:
+  kubectl:
+    manifests:
+      - kubernetes/datastore.yaml
+      - kubernetes/pubsub.yaml

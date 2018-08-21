@@ -1,5 +1,10 @@
 # GCP emulators
-## USAGE
+## USAGE 
+### minikube & skkafold
+```
+make deploy
+```
+### docker-compose
 ```
 docker network create gcp-network
 docker-compose up

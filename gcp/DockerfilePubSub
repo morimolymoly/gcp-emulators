@@ -6,3 +6,4 @@ RUN gcloud components install beta pubsub-emulator && \
 ADD ./ /mnt/data
 WORKDIR /mnt/data
 RUN mkdir pubsub
+CMD gcloud config set project emulator && gcloud beta emulators pubsub start --data-dir /mnt/data/pubsub --host-port 0.0.0.0:8538

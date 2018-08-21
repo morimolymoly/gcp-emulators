@@ -6,3 +6,4 @@ RUN gcloud components install beta cloud-datastore-emulator && \
 ADD ./ /mnt/data
 WORKDIR /mnt/data
 RUN mkdir datastore
+CMD gcloud config set project emulator && gcloud beta emulators datastore start --data-dir /mnt/data/datastore --host-port 0.0.0.0:8432
