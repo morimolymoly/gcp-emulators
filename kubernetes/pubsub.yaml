@@ -25,5 +25,5 @@ metadata:
 spec:
   containers:
   - name: pubsub
-    image: localhost:5000/pubsub
+    image: done/pubsub:dev
     imagePullPolicy: IfNotPresent

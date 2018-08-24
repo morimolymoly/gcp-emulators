@@ -1,11 +1,14 @@
 apiVersion: skaffold/v1alpha2
 kind: Config
 build:
+  tagPolicy:
+    envTemplate:
+      template: "{{.IMAGE_NAME}}:dev"
   artifacts:
-  - imageName: localhost:5000/pubsub
+  - imageName: done/pubsub
     docker:
       dockerfilePath: gcp/DockerfilePubSub
-  - imageName: localhost:5000/datastore
+  - imageName: done/datastore
     docker:
       dockerfilePath: gcp/DockerfileDataStore
 deploy:

@@ -2,6 +2,10 @@
 use-minikube:
 	kubectl config use-context minikube
 
+.PHONY: build
+build:
+	skaffold build -f skaffold/skaffold.yaml
+
 .PHONY: deploy
 deploy:
 	skaffold run -f skaffold/skaffold.yaml

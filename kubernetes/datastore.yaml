@@ -25,5 +25,5 @@ metadata:
 spec:
   containers:
   - name: datastore
-    image: localhost:5000/datastore
+    image: done/datastore:dev
     imagePullPolicy: IfNotPresent
